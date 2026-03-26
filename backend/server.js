@@ -2,6 +2,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import express from 'express'
 import dotenv from 'dotenv'
+import cors from 'cors'
 import colors from 'colors'
 import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
@@ -14,13 +15,18 @@ import uploadRoutes from './routes/uploadRoutes.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname2 = path.dirname(__filename)
+dotenv.config({ path: path.resolve(__dirname2, '.env') })
 console.log('ENV PATH:', path.resolve(__dirname2, '.env'))
 console.log('MONGO_URI:', process.env.MONGO_URI)
-dotenv.config({ path: path.resolve(__dirname2, '.env') })
 
 connectDB()
 
 const app = express()
+
+app.use(cors({
+  origin: ['https://handmade-haven-sandy.vercel.app', 'http://localhost:3000'],
+  credentials: true
+}))
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
