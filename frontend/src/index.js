@@ -5,6 +5,7 @@ import store from './store'
 import './bootstrap.min.css'
 import './index.css'
 import App from './App'
+import './axiosConfig'
 ReactDOM.render(
   <Provider store={store}>
     <App />
