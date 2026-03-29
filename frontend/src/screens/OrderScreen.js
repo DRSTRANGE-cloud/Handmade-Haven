@@ -129,7 +129,7 @@ const OrderScreen = ({ match, history }) => {
       />
 
       <Row>
-        <Col md={8}>
+        <Col xs={12} lg={8}>
           {/* shipping */}
           <InfoCard>
             <SectionTitle>🚚 Shipping Details</SectionTitle>
@@ -185,7 +185,7 @@ const OrderScreen = ({ match, history }) => {
           </InfoCard>
         </Col>
 
-        <Col md={4}>
+        <Col xs={12} lg={4}>
           <SummaryCard>
             <SectionTitle>🧾 Order Summary</SectionTitle>
             <SummaryRow><span>Items</span>    <span>₹{order.itemsPrice}</span></SummaryRow>
@@ -234,6 +234,9 @@ export default OrderScreen
 const PageWrap = styled.div`
   max-width: 1100px; margin: 0 auto; padding: 2rem 1rem;
   animation: ${fadeUp} 0.5s ease;
+  @media (max-width: 768px) {
+    padding: 1.25rem 0.75rem 5rem;
+  }
 `
 const PageTitle = styled.h1`
   font-size: 1.6rem; font-weight: 800; color: #4a1c12;
@@ -250,20 +253,56 @@ const TrackerCard = styled.div`
 const TrackerTitle = styled.h3`
   font-size: 1rem; font-weight: 700; color: #4a1c12; margin-bottom: 1.2rem;
 `
-const ProgressWrap = styled.div`position: relative; padding: 0 1rem;`
+const ProgressWrap = styled.div`
+  position: relative; padding: 0 1rem;
+  @media (max-width: 768px) {
+    padding: 0 0 0 0.75rem;
+  }
+`
 const ProgressBg   = styled.div`
   position: absolute; top: 20px;
   left: calc(1rem + 20px); right: calc(1rem + 20px);
   height: 3px; background: #f0e0d8; border-radius: 2px;
+  @media (max-width: 768px) {
+    top: 20px;
+    bottom: 20px;
+    left: 19px;
+    right: auto;
+    width: 3px;
+    height: auto;
+  }
 `
 const ProgressFill = styled.div`
   position: absolute; top: 20px; left: calc(-1rem + 20px);
   height: 3px; border-radius: 2px;
   background: linear-gradient(90deg, #b85c38, #e8926a);
   animation: ${fillBar} 0.8s ease forwards;
+  @media (max-width: 768px) {
+    top: 20px;
+    left: 19px;
+    width: 3px;
+    height: var(--fill);
+    background: linear-gradient(180deg, #b85c38, #e8926a);
+    animation: none;
+  }
 `
-const StepsRow  = styled.div`display: flex; justify-content: space-between; padding-bottom: 0.5rem;`
-const StepItem  = styled.div`display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1;`
+const StepsRow  = styled.div`
+  display: flex; justify-content: space-between; padding-bottom: 0.5rem;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+    padding-left: 0;
+  }
+`
+const StepItem  = styled.div`
+  display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1;
+  @media (max-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+  }
+`
 const StepIcon  = styled.div`
   width: 40px; height: 40px; border-radius: 50%;
   display: grid; place-items: center; font-size: 1rem; font-weight: 700;
@@ -275,6 +314,10 @@ const StepIcon  = styled.div`
 const StepLabel = styled.div`
   font-size: 0.68rem; font-weight: 600; text-align: center;
   color: ${p => p.active ? '#b85c38' : '#c9a090'};
+  @media (max-width: 768px) {
+    text-align: left;
+    font-size: 0.8rem;
+  }
 `
 const StatusBadge = styled.div`
   margin-top: 1rem; text-align: center; font-size: 0.85rem; font-weight: 700;
@@ -288,7 +331,12 @@ const InfoCard = styled.div`
   padding: 1.4rem; margin-bottom: 1.2rem;
   box-shadow: 0 4px 16px rgba(139,60,50,0.05);
 `
-const SummaryCard  = styled(InfoCard)`position: sticky; top: 1rem;`
+const SummaryCard  = styled(InfoCard)`
+  position: sticky; top: 1rem;
+  @media (max-width: 991px) {
+    position: static;
+  }
+`
 const SectionTitle = styled.h3`
   font-size: 0.95rem; font-weight: 700; color: #4a1c12;
   margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
@@ -307,6 +355,10 @@ const ItemRow   = styled.div`
   display: flex; align-items: center; gap: 1rem;
   padding: 0.6rem 0; border-bottom: 1px solid rgba(184,92,56,0.08);
   &:last-child { border-bottom: none; }
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
 `
 const ItemImg   = styled.img`
   width: 52px; height: 52px; object-fit: cover;
@@ -316,7 +368,14 @@ const ItemName  = styled.div`
   flex: 1; font-size: 0.87rem;
   a { color: #4a1c12; font-weight: 600; &:hover { color: #b85c38; } }
 `
-const ItemPrice = styled.div`font-size: 0.87rem; font-weight: 700; color: #b85c38; white-space: nowrap;`
+const ItemPrice = styled.div`
+  font-size: 0.87rem; font-weight: 700; color: #b85c38; white-space: nowrap;
+  @media (max-width: 768px) {
+    width: 100%;
+    white-space: normal;
+    padding-left: calc(52px + 1rem);
+  }
+`
 const SummaryRow = styled.div`
   display: flex; justify-content: space-between; align-items: center;
   padding: 0.5rem 0;
@@ -325,6 +384,9 @@ const SummaryRow = styled.div`
   font-size:   ${p => p.total ? '1.05rem' : '0.9rem'};
   color:       ${p => p.total ? '#b85c38' : '#4a1c12'};
   ${p => p.total && 'margin-top: 0.5rem;'}
+  @media (max-width: 768px) {
+    font-size: ${p => p.total ? '1rem' : '0.92rem'};
+  }
 `
 const ActionBtn = styled.button`
   width: 100%; padding: 0.8rem;

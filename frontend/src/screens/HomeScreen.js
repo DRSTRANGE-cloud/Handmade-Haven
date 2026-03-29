@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Product from '../components/Product';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -58,20 +58,13 @@ const HomeScreen = ({ match }) => {
             <Message variant="danger">{error}</Message>
           ) : (
             <>
-              <Row>
+              <div className="responsive-product-grid">
                 {products.map((product) => (
-                  <Col
-                    className="product_cards_container"
-                    key={product._id}
-                    xs={6}
-                    md={4}
-                    lg={4}
-                    xl={3}
-                  >
+                  <div className="product_cards_container" key={product._id}>
                     <Product product={product} />
-                  </Col>
+                  </div>
                 ))}
-              </Row>
+              </div>
               <Paginate
                 pages={pages}
                 page={page}

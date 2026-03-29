@@ -243,6 +243,12 @@ const FloatBtn = styled.button`
   transition: transform 0.2s;
   overflow: hidden;
   &:hover { transform: scale(1.1); }
+  @media (max-width: 768px) {
+    bottom: 1rem;
+    right: 1rem;
+    width: 58px;
+    height: 58px;
+  }
 `
 const LogoImg = styled.img`
   width: 44px; height: 44px;
@@ -270,6 +276,16 @@ const Panel = styled.div`
   display: flex; flex-direction: column;
   overflow: hidden; z-index: 9998;
   animation: ${slideUp} 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  @media (max-width: 768px) {
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: min(82vh, 720px);
+    border-radius: 24px 24px 0 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
 `
 const Header = styled.div`
   background: linear-gradient(135deg, ${C.primary}, ${C.primary2});
@@ -287,7 +303,7 @@ const HeaderName  = styled.div`color:#fff; font-weight:700; font-size:0.95rem;`
 const HeaderStatus = styled.div`color:rgba(255,255,255,0.8); font-size:0.72rem; margin-top:2px;`
 const CloseBtn = styled.button`
   background: rgba(255,255,255,0.18); border: none;
-  color: #fff; width: 28px; height: 28px; border-radius: 50%;
+  color: #fff; width: 42px; height: 30px; border-radius: 50%;
   cursor: pointer; font-size: 0.82rem;
   display: grid; place-items: center;
   &:hover { background: rgba(255,255,255,0.32); }
@@ -297,6 +313,9 @@ const Messages = styled.div`
   display: flex; flex-direction: column; gap: 0.7rem;
   &::-webkit-scrollbar { width: 4px; }
   &::-webkit-scrollbar-thumb { background: rgba(139,30,30,0.15); border-radius: 2px; }
+  @media (max-width: 768px) {
+    padding: 0.85rem;
+  }
 `
 const BubbleRow = styled.div`
   display: flex; align-items: flex-end; gap: 0.5rem;
@@ -379,6 +398,9 @@ const InputRow = styled.div`
   padding: 0.7rem 1rem;
   border-top: 1px solid ${C.border};
   flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  background: rgba(253,246,240,0.98);
 `
 const ChatInput = styled.input`
   flex: 1;

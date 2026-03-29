@@ -38,7 +38,7 @@ const PaymentScreen = ({ history }) => {
                 id="PayPal"
                 name="paymentMethod"
                 value="PayPal"
-                checked
+                checked={paymentMethod === 'PayPal'}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               ></Form.Check>
               {/* <Form.Check
@@ -51,11 +51,12 @@ const PaymentScreen = ({ history }) => {
             ></Form.Check> */}
               <Form.Check type="radio" label="Cash on Delivery" id="COD"
                 name="paymentMethod" value="COD"
+                checked={paymentMethod === 'COD'}
                 onChange={(e) => setPaymentMethod(e.target.value)} />
             </Col>
           </Form.Group>
 
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="primary" className="responsive-full-btn">
             Continue
           </Button>
         </Form>

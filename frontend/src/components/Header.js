@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <header>
       <Navbar className="nav-bar" expand="lg" collapseOnSelect>
-        <Container>
+        <Container className="header-shell">
           <LinkContainer to="/">
             <Navbar.Brand>
               <img
@@ -28,9 +28,9 @@ const Header = () => {
                 src={logo}
                 width="64"
                 height="64"
-                className="d-inline-block align-middle"
+                className="d-inline-block align-middle header-brand-logo"
               />
-              &nbsp;&nbsp; Handmade Haven
+              <span className="header-brand-text">Handmade Haven</span>
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle
@@ -38,9 +38,9 @@ const Header = () => {
             color="white"
             aria-controls="basic-navbar-nav"
           />
-          <Navbar.Collapse className="flex-gap" id="basic-navbar-nav">
+          <Navbar.Collapse className="header-collapse flex-gap" id="basic-navbar-nav">
             <Route render={({ history }) => <SearchBox history={history} />} />
-            <Nav className="ml-auto">
+            <Nav className="ml-auto header-nav-links">
               <LinkContainer to="/blog">
                 <Nav.Link>
                   <i className="fas fa-blog"></i> Blog

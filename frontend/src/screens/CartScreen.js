@@ -41,8 +41,8 @@ const CartScreen = ({ match, location, history }) => {
 
   return (
     <Container>
-      <Row>
-        <Col md={8}>
+      <Row className="cart-screen-layout">
+        <Col xs={12} lg={8}>
           <h1>Shopping Cart</h1>
           {cartItems.length === 0 ? (
             <Message>
@@ -52,15 +52,15 @@ const CartScreen = ({ match, location, history }) => {
             <ListGroup variant="flush">
               {cartItems.map((item) => (
                 <ListGroup.Item key={item.product}>
-                  <Row>
-                    <Col md={2}>
+                  <Row className="cart-item-row">
+                    <Col xs={4} sm={3} md={2} className="cart-item-media">
                       <Image src={getImageUrl(item.image)} alt={item.name} fluid rounded />
                     </Col>
-                    <Col md={3}>
+                    <Col xs={8} sm={9} md={3} className="cart-item-name">
                       <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </Col>
-                    <Col md={2}>&#8377;{item.price}</Col>
-                    <Col md={2}>
+                    <Col xs={6} md={2} className="cart-item-price">&#8377;{item.price}</Col>
+                    <Col xs={6} md={2} className="cart-item-qty">
                       <Form.Control
                         as="select"
                         value={item.qty}
@@ -77,10 +77,11 @@ const CartScreen = ({ match, location, history }) => {
                         ))}
                       </Form.Control>
                     </Col>
-                    <Col md={2}>
+                    <Col xs={12} md={2} className="cart-item-remove">
                       <Button
                         type="button"
                         variant="light"
+                        className="responsive-full-btn cart-remove-btn"
                         onClick={() => removeFromCartHandler(item.product)}
                       >
                         <i className="fas fa-trash"></i>
@@ -92,8 +93,8 @@ const CartScreen = ({ match, location, history }) => {
             </ListGroup>
           )}
         </Col>
-        <Col md={4}>
-          <Card>
+        <Col xs={12} lg={4}>
+          <Card className="cart-summary-card">
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>
@@ -108,7 +109,7 @@ const CartScreen = ({ match, location, history }) => {
               <ListGroup.Item>
                 <Button
                   type="button"
-                  className="btn-block"
+                  className="btn-block responsive-full-btn"
                   disabled={cartItems.length === 0}
                   onClick={checkoutHandler}
                 >

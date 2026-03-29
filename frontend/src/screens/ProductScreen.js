@@ -85,11 +85,16 @@ const ProductScreen = ({ history, match }) => {
       ) : (
         <>
           <Meta title={product.name} />
-          <Row>
-            <Col className="center" md={6}>
-              <Image src={getImageUrl(product.image)} alt={product.name} fluid />
+          <Row className="product-screen-layout">
+            <Col className="center product-media-col" xs={12} lg={6}>
+              <Image
+                className="product-screen-image"
+                src={getImageUrl(product.image)}
+                alt={product.name}
+                fluid
+              />
             </Col>
-            <Col md={3}>
+            <Col xs={12} md={7} lg={3} className="product-details-col">
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
@@ -109,8 +114,8 @@ const ProductScreen = ({ history, match }) => {
                 </ListGroup.Item>
               </ListGroup>
             </Col>
-            <Col md={3}>
-              <Card>
+            <Col xs={12} md={5} lg={3} className="product-buy-col">
+              <Card className="product-purchase-card">
                 <ListGroup variant="flush">
                   <ListGroup.Item>
                     <Row>
@@ -160,12 +165,12 @@ const ProductScreen = ({ history, match }) => {
                   )}
 
                   <ListGroup.Item>
-                    <Button
-                      onClick={addToCartHandler}
-                      className="btn-block"
-                      type="button"
-                      disabled={product.countInStock === 0}
-                    >
+                      <Button
+                        onClick={addToCartHandler}
+                        className="btn-block responsive-full-btn"
+                        type="button"
+                        disabled={product.countInStock === 0}
+                      >
                       Add To Cart
                     </Button>
                   </ListGroup.Item>
@@ -174,7 +179,7 @@ const ProductScreen = ({ history, match }) => {
             </Col>
           </Row>
           <Row>
-            <Col md={6}>
+            <Col xs={12} lg={8}>
               <h2>Reviews</h2>
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">

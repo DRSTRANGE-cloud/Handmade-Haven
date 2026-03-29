@@ -306,6 +306,50 @@ const Wrapper = styled.section`
   @media (min-width: 1280px) {
     padding-top: 6rem;
   }
+
+  @media (max-width: 1024px) {
+    padding: 4rem 0 5rem;
+
+    .section-center {
+      gap: 2.5rem;
+    }
+
+    .img-wrap img {
+      width: 100%;
+      height: clamp(280px, 52vw, 460px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section-label {
+      margin-bottom: 1.5rem;
+    }
+
+    article .title {
+      display: block;
+      text-align: center;
+    }
+
+    article .underline {
+      width: 100%;
+    }
+
+    .img-wrap .img-badge {
+      right: 0;
+      bottom: -12px;
+      padding: 0.85rem 1.1rem;
+    }
+
+    .stats-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+    }
+  }
 `;
 
 export default About;

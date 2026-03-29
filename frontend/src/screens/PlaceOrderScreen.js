@@ -68,8 +68,8 @@ const PlaceOrderScreen = ({ history }) => {
   return (
     <Container>
       <CheckoutSteps step1 step2 step3 step4 />
-      <Row>
-        <Col md={8}>
+      <Row className="place-order-layout">
+        <Col xs={12} lg={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
@@ -95,16 +95,16 @@ const PlaceOrderScreen = ({ history }) => {
                 <ListGroup variant="flush">
                   {cart.cartItems.map((item, index) => (
                     <ListGroup.Item key={index}>
-                      <Row>
-                        <Col md={1}>
+                      <Row className="place-order-item-row">
+                        <Col xs={4} sm={3} md={2} lg={1}>
                          <Image src={getImageUrl(item.image)} alt={item.name} fluid rounded />
                         </Col>
-                        <Col>
+                        <Col xs={8} sm={9} md={6}>
                           <Link to={`/product/${item.product}`}>
                             {item.name}
                           </Link>
                         </Col>
-                        <Col md={4}>
+                        <Col xs={12} md={4} className="place-order-item-price">
                           {item.qty} x &#8377;{item.price} = &#8377;
                           {item.qty * item.price}
                         </Col>
@@ -116,8 +116,8 @@ const PlaceOrderScreen = ({ history }) => {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={4}>
-          <Card>
+        <Col xs={12} lg={4}>
+          <Card className="cart-summary-card">
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>Order Summary</h2>
@@ -146,7 +146,7 @@ const PlaceOrderScreen = ({ history }) => {
               <ListGroup.Item>
                 <Button
                   type="button"
-                  className="btn-block"
+                  className="btn-block responsive-full-btn"
                   disabled={cart.cartItems === 0}
                   onClick={placeOrderHandler}
                 >

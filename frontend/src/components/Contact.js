@@ -225,6 +225,16 @@ const FormContainer = styled.article`
     }
   }
 
+  @media (max-width: 768px) {
+    article {
+      grid-template-columns: 1fr;
+    }
+
+    .form {
+      padding: 1.5rem 1rem;
+    }
+  }
+
   .btn {
     font-family: 'Poppins', sans-serif;
     font-size: 0.9rem;
