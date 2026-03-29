@@ -29,31 +29,7 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <script>
-      window.addEventListener('load', function () {
-        const tidioScript = document.createElement('script');
-        tidioScript.src = '//code.tidio.co/rxtebh9ltksco2ryswa2hanaahadztyz.js';
-        tidioScript.async = true;
-        document.body.appendChild(tidioScript);
-      });
-    </script>
+    
 
-    <!-- Register Service Worker -->
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("./serviceWorker.js")
-            .then((reg) =>
-              console.log("Service Worker registered: ", reg.scope)
-            )
-            .catch((err) =>
-              console.warn("Service Worker registration failed: ", err)
-            );
-        });
-      }
-    </script>
-
-    <script src="registerWorker.js" defer></script>
   </body>
 </html>

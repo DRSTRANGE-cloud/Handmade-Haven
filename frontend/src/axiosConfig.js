@@ -1,5 +1,10 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://handmade-haven-6ygd.onrender.com'
+const BASE_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:5000"
+    : "https://handmade-haven-6ygd.onrender.com";
 
-export default axios
+axios.defaults.baseURL = BASE_URL;
+
+export default axios;

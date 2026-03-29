@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { contactItems } from '../constants/contactConstant';
+import axios from '../axiosConfig';
 import { FaLongArrowAltRight } from 'react-icons/fa';
-import { useForm, ValidationError } from '@formspree/react';
+import { contactItems } from '../constants/contactConstant';
 
+// ✅ MAIN COMPONENT
 const Contact = () => {
   return (
     <Container className="section">
@@ -16,8 +17,9 @@ const Contact = () => {
         <ContactInfo>
           <p>
             If you have any questions or just want to get in touch, ping us via
-            the form. We look forward to hear from you!
+            the form.
           </p>
+
           {contactItems.map((item) => (
             <div key={item.id} className="contact-item">
               <span>{item.icon}</span>
@@ -33,53 +35,77 @@ const Contact = () => {
   );
 };
 
+// ✅ FORM COMPONENT
 const ContactForm = () => {
-  const [state, handleSubmit] = useForm('xyyapqwr');
+  const [formData, setFormData] = React.useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const [success, setSuccess] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      await axios.post('/api/contact', formData);
+      setSuccess(true);
+
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+
+    setLoading(false);
+  };
 
   return (
     <FormContainer>
       <form className="form" onSubmit={handleSubmit}>
         <h4 className="mb-4">
-          {state.succeeded
-            ? 'Your message has been sent!'
-            : 'send me a message'}
+          {success ? 'Message sent successfully!' : 'send me a message'}
         </h4>
+
         <article>
           <div className="contact-from-control">
-            <label htmlFor="Name">name</label>
-            <input type="text" name="Name" required />
+            <label>name</label>
+            <input name="name" value={formData.name} onChange={handleChange} required />
           </div>
+
           <div className="contact-from-control">
-            <label htmlFor="Email">email</label>
-            <input type="email" name="Email" required />
+            <label>email</label>
+            <input type="email" name="email" value={formData.email} onChange={handleChange} required />
           </div>
         </article>
 
         <div className="contact-from-control">
-          <label htmlFor="Subject">subject</label>
-          <input type="text" name="Subject" required />
+          <label>subject</label>
+          <input name="subject" value={formData.subject} onChange={handleChange} required />
         </div>
 
         <div className="contact-from-control">
-          <label htmlFor="Message">message</label>
-          <textarea
-            name="Message"
-            placeholder="Your message here..."
-          ></textarea>
+          <label>message</label>
+          <textarea name="message" value={formData.message} onChange={handleChange} required />
         </div>
 
-        <ValidationError
-          prefix="Message"
-          field="message"
-          errors={state.errors}
-        />
-
-        <button
-          type="submit"
-          className="btn btn-block btn-danger"
-          disabled={state.submitting}
-        >
-          send message <FaLongArrowAltRight />
+        <button className="btn btn-block btn-danger" disabled={loading}>
+          {loading ? 'Sending...' : 'Send Message'} <FaLongArrowAltRight />
         </button>
       </form>
     </FormContainer>
