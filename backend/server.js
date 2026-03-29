@@ -33,7 +33,7 @@ const app = express()
 
 // ✅ Middleware
 app.use(cors({
-  origin: ['https://handmade-haven-sandy.vercel.app', 'http://localhost:3000'],
+  origin: ['https://handmade-haven-live.vercel.app', 'http://localhost:3000'],
   credentials: true
 }))
 
