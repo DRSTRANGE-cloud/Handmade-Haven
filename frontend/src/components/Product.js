@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 import Rating from './Rating';
+import { getImageUrl } from '../utils/imageHelper';
 
 const Product = ({ product }) => {
   const history = useHistory();
@@ -12,9 +13,9 @@ const Product = ({ product }) => {
   return (
     <Card className="my-3 p-3 rounded product_card">
       <Link to={`/product/${product._id}`}>
-        <img
+       <img
           className="product_card_img"
-          src={product.image}
+          src={getImageUrl(product.image)}
           alt={product.name}
         />
       </Link>
