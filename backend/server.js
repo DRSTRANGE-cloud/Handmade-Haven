@@ -56,7 +56,7 @@ app.get('/api/config/paypal', (req, res) =>
 )
 
 // ✅ Static uploads
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
 
 // ✅ Production
 if (process.env.NODE_ENV === 'production') {
