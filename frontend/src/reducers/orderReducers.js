@@ -98,19 +98,11 @@ export const orderPayReducer = (state = {}, action) => {
 export const orderDeliverReducer = (state = {}, action) => {
   switch (action.type) {
     case ORDER_DELIVER_REQUEST:
-      return {
-        loading: true,
-      }
+      return { loading: true }
     case ORDER_DELIVER_SUCCESS:
-      return {
-        loading: false,
-        success: true,
-      }
+      return { loading: false, success: true }
     case ORDER_DELIVER_FAIL:
-      return {
-        loading: false,
-        error: action.payload,
-      }
+      return { loading: false, error: action.payload }
     case ORDER_DELIVER_RESET:
       return {}
     default:

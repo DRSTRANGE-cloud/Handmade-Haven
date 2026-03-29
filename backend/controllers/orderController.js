@@ -2,6 +2,55 @@ import asyncHandler from "express-async-handler";
 import mongoose from "mongoose";
 import Order from "../models/orderModel.js";
 import Product from "../models/productModel.js"; 
+export const confirmCOD = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id)
+  if (!order) {
+    res.status(404)
+    throw new Error('Order not found')
+  }
+  if (order.paymentMethod !== 'COD') {
+    res.status(400)
+    throw new Error('Order is not COD')
+  }
+  order.isPaid = false // COD is paid on delivery
+  order.paymentResult = {
+    id: `COD-${Date.now()}`,
+    status: 'COD_CONFIRMED',
+    update_time: new Date().toISOString(),
+    email_address: order.user.email,
+  }
+  const updatedOrder = await order.save()
+  res.json(updatedOrder)
+})
+// @desc    Mark order as delivered (Admin/Seller)
+// @route   PUT /api/orders/:id/deliver
+// @access  Private/Admin or Seller
+
+export const updateOrderToDelivered = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id)
+
+  if (!order) {
+    res.status(404)
+    throw new Error('Order not found')
+  }
+
+  if (order.paymentMethod === 'COD' && !order.isPaid) {
+    order.isPaid = true
+    order.paidAt = Date.now()
+    order.paymentResult = {
+      id: `COD-${order._id}`,
+      status: 'PAID_ON_DELIVERY',
+      update_time: new Date().toISOString(),
+    }
+  }
+
+  order.isDelivered = true
+  order.deliveredAt = Date.now()
+
+  const updatedOrder = await order.save()
+
+  res.json(updatedOrder)
+})
 
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
@@ -80,21 +129,6 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   }
 });
 
-const updateOrderToDelivered = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id);
-
-  if (order) {
-    order.isDelivered = true;
-    order.deliveredAt = Date.now();
-
-    const updatedOrder = await order.save();
-    res.json(updatedOrder);
-  } else {
-    res.status(404);
-    throw new Error("Order not found");
-  }
-});
-
 const getMyOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({ user: req.user._id }).sort({
     createdAt: "desc",
@@ -128,7 +162,6 @@ export {
   addOrderItems,
   getOrderById,
   updateOrderToPaid,
-  updateOrderToDelivered,
   getMyOrders,
   getOrders,
 };

@@ -116,6 +116,7 @@ const Container = styled.section`
   .title {
     text-align: center;
     margin: 0 auto 2rem;
+    
   }
 `;
 

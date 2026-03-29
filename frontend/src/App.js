@@ -19,7 +19,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import BlogScreen from './screens/BlogScreen';
 import SingleBlogScreen from './screens/SingleBlogScreen';
-
+import Chatbot from './components/Chatbot'
 const App = () => {
   return (
     <Router>
@@ -38,6 +38,7 @@ const App = () => {
         <Route path="/cart/:id?" component={CartScreen} />
         <Route path="/admin/userlist" component={UserListScreen} />
         <Route path="/admin/user/:id/edit" component={UserEditScreen} />
+        <Chatbot />
         <Route path="/admin/productlist" component={ProductListScreen} exact />
         <Route
           path="/admin/productlist/:pageNumber"

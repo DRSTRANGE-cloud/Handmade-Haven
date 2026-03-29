@@ -10963,13 +10963,13 @@ h2 {
 }
 
 .section {
-    padding: 5rem 0;
+    padding: 3rem 0rem;
     width: 100%
 }
 
 .section-center {
     margin: 0 auto;
-    max-width: 1170px;
+    max-width: 1190px;
     max-width: var(--max-width);
     width: 90%
 }

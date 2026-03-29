@@ -1,5 +1,4 @@
 import express from 'express'
-const router = express.Router()
 import {
   addOrderItems,
   getOrderById,
@@ -10,9 +9,10 @@ import {
 } from '../controllers/orderController.js'
 import {
   protect,
-  admin,
   admin_or_seller,
 } from '../middleware/authMiddleware.js'
+
+const router = express.Router()
 
 router
   .route('/')

@@ -1,10 +1,14 @@
 import mongoose from 'mongoose'
 
-const MONGO_URI = 'mongodb://farhankhan:farhankhan@cluster0-shard-00-00.c3zhj.mongodb.net:27017,cluster0-shard-00-01.c3zhj.mongodb.net:27017,cluster0-shard-00-02.c3zhj.mongodb.net:27017/?ssl=true&authSource=admin&retryWrites=true&w=majority&appName=Cluster0'
-
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(MONGO_URI, {
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI
+
+    if (!mongoUri) {
+      throw new Error('MongoDB connection string is missing from environment')
+    }
+
+    const conn = await mongoose.connect(mongoUri, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       useCreateIndex: true,

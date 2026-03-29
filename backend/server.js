@@ -14,6 +14,7 @@ import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import contactRoutes from './routes/contactRoutes.js'
+import chatRoutes from './routes/chatRoutes.js'
 
 // ✅ __dirname setup
 const __filename = fileURLToPath(import.meta.url)
@@ -23,7 +24,10 @@ const __dirname = path.dirname(__filename)
 dotenv.config({ path: path.resolve(__dirname, '.env') })
 
 console.log('ENV PATH:', path.resolve(__dirname, '.env'))
-console.log('MONGO_URI:', process.env.MONGO_URI)
+console.log(
+  'MongoDB env configured:',
+  Boolean(process.env.MONGODB_URI || process.env.MONGO_URI)
+)
 
 // ✅ Connect DB
 connectDB()
@@ -48,7 +52,8 @@ app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)
-app.use('/api/contact', contactRoutes)   // ✅ correct position
+app.use('/api/contact', contactRoutes)
+app.use('/api/chat', chatRoutes)
 
 // ✅ PayPal config
 app.get('/api/config/paypal', (req, res) =>
