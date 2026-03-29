@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "./Loader";
 import Message from "./Message";
 import { listTopProducts } from "../actions/productActions";
+import { getImageUrl } from '../utils/imageHelper'
 
 const ProductCarousel = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const ProductCarousel = () => {
         {products.map((product) => (
           <Carousel.Item key={product._id}>
             <Link className="carousel_in" to={`/product/${product._id}`}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image src={getImageUrl(product.image)} alt={product.name} fluid />
               <Carousel.Caption className="carousel-caption">
                 <h2>
                   {product.name} (&#8377;{product.price})

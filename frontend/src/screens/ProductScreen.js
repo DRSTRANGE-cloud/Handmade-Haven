@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { getImageUrl } from '../utils/imageHelper'
 import {
   Row,
   Col,
@@ -86,7 +87,7 @@ const ProductScreen = ({ history, match }) => {
           <Meta title={product.name} />
           <Row>
             <Col className="center" md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image src={getImageUrl(product.image)} alt={product.name} fluid />
             </Col>
             <Col md={3}>
               <ListGroup variant="flush">
