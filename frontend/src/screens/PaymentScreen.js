@@ -31,32 +31,38 @@ const PaymentScreen = ({ history }) => {
         <Form onSubmit={submitHandler}>
           <Form.Group>
             <Form.Label as="legend">Select Method</Form.Label>
-            <Col>
-              <Form.Check
-                type="radio"
-                label="PayPal or Credit Card"
-                id="PayPal"
-                name="paymentMethod"
-                value="PayPal"
-                checked={paymentMethod === 'PayPal'}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              ></Form.Check>
-              {/* <Form.Check
-              type='radio'
-              label='Stripe'
-              id='Stripe'
-              name='paymentMethod'
-              value='Stripe'
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            ></Form.Check> */}
-              <Form.Check type="radio" label="Cash on Delivery" id="COD"
-                name="paymentMethod" value="COD"
-                checked={paymentMethod === 'COD'}
-                onChange={(e) => setPaymentMethod(e.target.value)} />
-            </Col>
+            <div className="payment-options">
+
+  <label
+    className={`payment-card ${paymentMethod === 'PayPal' ? 'active' : ''}`}
+  >
+    <input
+      type="radio"
+      name="paymentMethod"
+      value="PayPal"
+      checked={paymentMethod === 'PayPal'}
+      onChange={(e) => setPaymentMethod(e.target.value)}
+    />
+    <span>💳 PayPal / Credit Card</span>
+  </label>
+
+  <label
+    className={`payment-card ${paymentMethod === 'COD' ? 'active' : ''}`}
+  >
+    <input
+      type="radio"
+      name="paymentMethod"
+      value="COD"
+      checked={paymentMethod === 'COD'}
+      onChange={(e) => setPaymentMethod(e.target.value)}
+    />
+    <span>🚚 Cash on Delivery</span>
+  </label>
+
+</div>
           </Form.Group>
 
-          <Button type="submit" variant="primary" className="responsive-full-btn">
+          <Button type="submit" className="payment-btn">
             Continue
           </Button>
         </Form>

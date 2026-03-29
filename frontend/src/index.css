@@ -285,6 +285,35 @@ MAIN STYLES
 .pad-5 {
   padding: 5px;
 }
+.payment-card {
+  display: flex;
+  align-items: center;   /* ✅ vertical center alignment */
+  gap: 12px;             /* ✅ proper spacing */
+  padding: 14px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+/* FIX RADIO BUTTON ALIGNMENT */
+.payment-card input {
+  margin: 0;             /* ✅ remove default offset */
+  transform: scale(1.2); /* optional: slightly bigger */
+}
+
+/* TEXT ALIGNMENT */
+.payment-card span {
+  display: flex;
+  align-items: center;   /* ✅ ensures emoji + text aligned */
+  gap: 6px;
+}
+.payment-options {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap; /* responsive */
+}
 
 @media (max-width: 481px) {
   .product_cards_container {
