@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getImageUrl } from '../utils/imageHelper'
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Row,
@@ -53,7 +54,7 @@ const CartScreen = ({ match, location, history }) => {
                 <ListGroup.Item key={item.product}>
                   <Row>
                     <Col md={2}>
-                      <Image src={item.image} alt={item.name} fluid rounded />
+                      <Image src={getImageUrl(item.image)} alt={item.name} fluid rounded />
                     </Col>
                     <Col md={3}>
                       <Link to={`/product/${item.product}`}>{item.name}</Link>

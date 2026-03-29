@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { getImageUrl } from '../utils/imageHelper'
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -96,12 +97,7 @@ const PlaceOrderScreen = ({ history }) => {
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fluid
-                            rounded
-                          />
+                         <Image src={getImageUrl(item.image)} alt={item.name} fluid rounded />
                         </Col>
                         <Col>
                           <Link to={`/product/${item.product}`}>

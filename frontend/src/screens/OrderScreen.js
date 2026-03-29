@@ -6,6 +6,7 @@ import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import { getImageUrl } from '../utils/imageHelper'
 import {
   getOrderDetails,
   payOrder,
@@ -142,12 +143,7 @@ const OrderScreen = ({ match, history }) => {
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fluid
-                            rounded
-                          />
+                          <Image src={getImageUrl(item.image)} alt={item.name} fluid rounded />
                         </Col>
                         <Col>
                           <Link to={`/product/${item.product}`}>
