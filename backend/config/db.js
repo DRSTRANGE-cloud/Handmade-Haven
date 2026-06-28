@@ -1,23 +1,48 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import dns from 'dns';
+
+// Configure DNS servers for MongoDB Atlas (helps resolve SRV lookup issues)
+const configureMongoDns = (mongoUri) => {
+  if (!mongoUri.startsWith('mongodb+srv://')) {
+    return;
+  }
+
+  const dnsServers = (
+    process.env.MONGODB_DNS_SERVERS || '8.8.8.8,1.1.1.1'
+  )
+    .split(',')
+    .map((server) => server.trim())
+    .filter(Boolean);
+
+  if (dnsServers.length) {
+    dns.setServers(dnsServers);
+  }
+};
 
 const connectDB = async () => {
   try {
-    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI
+    // Support both variable names
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
 
     if (!mongoUri) {
-      throw new Error('MongoDB connection string is missing from environment')
+      throw new Error('MongoDB connection string is missing from environment variables.');
     }
 
-    const conn = await mongoose.connect(mongoUri, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-      useCreateIndex: true,
-    })
-    console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline)
-  } catch (error) {
-    console.error(`Error: ${error}`.red.underline.bold)
-    process.exit(1)
-  }
-}
+    // Configure DNS before connecting
+    configureMongoDns(mongoUri);
 
-export default connectDB
+    const conn = await mongoose.connect(mongoUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+    });
+
+    console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
+  } catch (error) {
+    console.error(`MongoDB Connection Error: ${error.message}`.red.bold);
+    process.exit(1);
+  }
+};
+
+export default connectDB;
